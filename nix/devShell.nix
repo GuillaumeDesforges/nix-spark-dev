@@ -1,4 +1,5 @@
 { mkShell
+, callPackage
 , jdk8
 , hadoop
 , spark
@@ -11,8 +12,13 @@ let
     # ignoreCollisions = true;
     packages = p: with p; [ pyspark_3-1-2 ];
   };
+
+  scalaAlmond = callPackage ./kernels/scala.nix {
+    name = "scala-env";
+  };
+
   jupyterEnvironment = jupyterWith.jupyterlabWith {
-    kernels = [ iPython ];
+    kernels = [ iPython scalaAlmond ];
   };
 in
 mkShell {

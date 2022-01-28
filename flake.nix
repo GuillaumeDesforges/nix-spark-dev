@@ -19,6 +19,10 @@
         in
         {
           devShell = pkgs.callPackage ./nix/devShell.nix { };
+          packages = {
+            almond = pkgs.almond;
+          };
+          passthru = { inherit pkgs; };
         }
       );
 }

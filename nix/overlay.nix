@@ -1,7 +1,7 @@
 final: prev:
 let
   packageOverrides = selfPythonPackages: pythonPackages: {
-    pyspark_3-1-2 = selfPythonPackages.callPackage ./pkgs/pyspark_3-1-2.nix { };
+    pyspark_3-1-2 = selfPythonPackages.callPackage ./pkgs/pythonPackages/pyspark_3-1-2.nix { };
   };
 
 in
@@ -12,4 +12,6 @@ in
         (old.packageOverrides or (_: _: { }))
         packageOverrides;
   });
+
+  almond = final.callPackage ./pkgs/tools/almond { };
 }
